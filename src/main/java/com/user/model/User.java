@@ -11,7 +11,7 @@ public class User {
 	private String password;
 	private String address;
 	private String phone;
-	private String profile;
+	private Profile profile;
 
 	public String getId() {
 		return id;
@@ -61,11 +61,11 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getProfile() {
+	public Profile getProfile() {
 		return profile;
 	}
 
-	public void setProfile(String profile) {
+	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
 
