@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,14 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<Object> post(@RequestBody User user) {
 		return new ResponseEntity<>(service.save(user), HttpStatus.OK);
+	}
+
+	@PutMapping
+	public ResponseEntity<Object> put(@RequestBody User user) {
+		if(service.exists(user.getId())) {		
+			return new ResponseEntity<>(service.save(user), HttpStatus.OK);
+		}
+		return new ResponseEntity<Object>("Object not found", HttpStatus.BAD_REQUEST);
 	}
 	
 	@DeleteMapping("{id}")

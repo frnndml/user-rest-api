@@ -6,4 +6,6 @@ import com.user.model.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
+	User findByName(String name);
+	
 }
