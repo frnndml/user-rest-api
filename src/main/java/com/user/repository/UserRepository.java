@@ -1,11 +1,11 @@
 package com.user.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.user.model.User;
 
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends PagingAndSortingRepository<User, String> {
 
-	User findByName(String name);
+	User findByEmail(String name);
 	
 }

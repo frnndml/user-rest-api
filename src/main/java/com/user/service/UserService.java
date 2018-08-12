@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,12 +26,8 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	public List<User> findAll(int page, int limit) {
-		// Sort sort = new Sort(direction, properties);
-		// PageRequest request = PageRequest.of(page, limit, sort)
-
-		PageRequest request = PageRequest.of(page, limit);
-		Page<User> all = repository.findAll(request);
+	public List<User> findAll(Pageable pageable) {
+		Page<User> all = repository.findAll(pageable);
 		List<User> users = all.getContent();
 
 		return users;
@@ -60,7 +56,7 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = repository.findByName(username);
+		User user = repository.findByEmail(username);
 
 		if (user == null) {
 			throw new UsernameNotFoundException(username);
