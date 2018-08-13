@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-rest-api
+spec:
+  selector:
+    matchLabels:
+      app: user-rest-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-rest-api
+    spec:
+      containers:
+      - name: user-rest-api
+        image: frnndml/user-rest-api 
+        ports:
+        - containerPort: 8080
+          name: server
+
